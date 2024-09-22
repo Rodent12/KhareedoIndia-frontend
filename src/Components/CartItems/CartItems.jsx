@@ -4,6 +4,7 @@ import remove_icon from '../Assets/cart_cross_icon.png'
 
 
 import './CartItems.css'
+import ThankYouModal from '../ThankYouModal/ThankYouModel'
 const CartItems = () => {
     const {all_product,cartItems,removeFromCart,getTotalCartAmount} = useContext(ShopContext);
   return (
@@ -50,7 +51,7 @@ const CartItems = () => {
                         <p>Total</p>
                         <p>${getTotalCartAmount()}</p>
                     </div>
-                    <button>PROCEED TO CHECKOUT</button>
+                    <ThankYouModal/>
                 </div>
                 <div className="cartitems-promocode">
                     <p>If you have a promocode, Enter it here</p>

@@ -183,11 +183,6 @@
     .cartitems-total{
         margin: 0px;
     }
-    .cartitems-total button{
-        max-width: 200px;
-        height: 45px;
-        font-size: 13px;
-    }
     .cartitems-promobox{
         width: auto;
         max-width: 500px;
