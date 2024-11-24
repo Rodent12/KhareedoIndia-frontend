@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 import{ShopContext} from '../../Contexts/ShopContext'
 import remove_icon from '../Assets/cart_cross_icon.png'
-
-
 import './CartItems.css'
 import ThankYouModal from '../ThankYouModal/ThankYouModel'
 const CartItems = () => {
     const {all_product,cartItems,removeFromCart,getTotalCartAmount} = useContext(ShopContext);
+
   return (
     <div className='cartitems'>
         <div className="cartitems-format-main">
@@ -51,6 +50,7 @@ const CartItems = () => {
                         <p>Total</p>
                         <p>${getTotalCartAmount()}</p>
                     </div>
+                    
                     <ThankYouModal/>
                 </div>
                 <div className="cartitems-promocode">

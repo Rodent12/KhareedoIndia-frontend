@@ -2,6 +2,9 @@ import React, { createContext, useEffect, useState } from 'react';
 
 export const ShopContext = createContext(null);
 
+const backendURL = 'https://khareedoindia-backend.onrender.com';
+// const backendURL = 'https://localhost:4000';
+
 const getDefaultCart = ()=>{
     let cart = {};
     for(let index=0;index < 300+1;index++){
@@ -15,12 +18,12 @@ const ShopContextProvider = (props) =>{
     const [all_product,setAll_Product] = useState([]);
 
     const fetchInfo = async()=>{
-        await fetch('https://khareedoindia-backend.onrender.com/allproducts')
+        await fetch(backendURL +'/allproducts')
         .then((res)=>res.json())
         .then((data)=>{setAll_Product(data)});
 
-        if(localStorage.getItem('auth-token')){
-            fetch('https://khareedoindia-backend.onrender.com/getcart',{
+        if(localStorage.getItem('auth-token')){ // checks if they are logged in
+            fetch(backendURL + '/getcart',{
                 method : 'GET',
                 headers : {
                     Accept : 'application/form-data',
@@ -42,7 +45,7 @@ const ShopContextProvider = (props) =>{
     const addToCart = (itemId)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}));
         if(localStorage.getItem('auth-token')){
-            fetch('https://khareedoindia-backend.onrender.com/addtocart',{
+            fetch(backendURL+'/addtocart',{
                 method : 'POST',
                 headers : {
                     Accept : 'application/form-data',
@@ -61,7 +64,7 @@ const ShopContextProvider = (props) =>{
     const removeFromCart = (itemId)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}));
         if(localStorage.getItem('auth-token')){
-            fetch('https://khareedoindia-backend.onrender.com/removefromcart',{
+            fetch(backendURL + '/removefromcart',{
                 method : 'POST',
                 headers : {
                     Accept : 'application/form-data',

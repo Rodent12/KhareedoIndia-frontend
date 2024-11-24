@@ -3,7 +3,7 @@ import './Navbar.css'
 import { ShopContext } from '../../Contexts/ShopContext'
 import logo from '../Assets/logo.png'
 import cart_icon from '../Assets/cart_icon.png'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import nav_dropdown from '../Assets/nav_dropdown_icon.png'
 
 const Navbar = () => {
@@ -17,11 +17,14 @@ const Navbar = () => {
         e.target.classList.toggle('open');
     }
 
+    const navigate = useNavigate();
+    const redir = () => {navigate('/')}
+
   return (
     <div className='navbar'>
         <div className='nav-logo'>
             <img src={logo} alt=""/>
-            <p>KhareedoIndia</p>
+            <p onClick={redir} style={{cursor : "pointer"}}>KhareedoIndia</p>
         </div>
         <img className ="nav-dropdown"onClick={dropdown_toggle} src={nav_dropdown} alt="" />
         <ul ref ={menuRef} className='nav-menu'>
@@ -31,8 +34,18 @@ const Navbar = () => {
             <li onClick={()=>{setMenu("kids")}}><Link to="/kids" style ={{textDecoration : 'none'}}>Kids</Link>{menu==="kids"?<hr/>:<></>}</li>
         </ul>
         <div className="nav-login-cart">
-            {localStorage.getItem('auth-token')?<button onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Logout</button>
-            :<Link to="/login" style ={{textDecoration : 'none'}}><button>Login</button></Link>}
+            {
+            localStorage.getItem('auth-token') ?
+            <button 
+                onClick={()=>{
+                    localStorage.removeItem('auth-token');
+                    window.location.replace('/')
+                }}
+            >
+                Logout
+            </button> :
+            <Link to="/login" style ={{textDecoration : 'none'}}><button>Login</button></Link>
+            }
             <Link to="/cart" style ={{textDecoration : 'none'}}><img src={cart_icon} alt=""/></Link>
             <div className="nav-cart-count">{getTotalCartItems()}</div>
         </div>

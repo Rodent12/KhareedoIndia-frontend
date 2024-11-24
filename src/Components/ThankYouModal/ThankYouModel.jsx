@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 import './ThankYouModal.css';
 
 const ThankYouModal = () => {
@@ -6,10 +7,19 @@ const ThankYouModal = () => {
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
+  const navigate = useNavigate();
+  const redir = () => {navigate('/login')}
+  const token = localStorage.getItem('auth-token');
+  let isLoggedIn = 0;
+  if(token){
+    isLoggedIn = 1;
+  }
+
+  
 
   return (
     <div className="modal-container">
-      <button onClick={openModal} className="purchase-button">
+      <button onClick={isLoggedIn ? openModal : redir} className="purchase-button">
         Complete Purchase
       </button>
 

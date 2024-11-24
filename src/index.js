@@ -10,5 +10,4 @@ root.render(
     <ShopContextProvider>
     <App />
     </ShopContextProvider>
-     
 );
